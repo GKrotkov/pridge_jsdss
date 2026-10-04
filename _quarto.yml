@@ -9,7 +9,14 @@ format:
     toc: true
     comments:
       hypothesis: true
-  jasa-pdf: default
+  jasa-pdf:
+    notebook-links: false
+    fig-pos: "htbp"
+    include-in-header:
+      text: |
+        % agsm.bst prints URLs with \harvardurl, which natbib typesets as
+        % plain italic text; that breaks on URLs with underscores, so use \url
+        \AtBeginDocument{\def\harvardurl{\url}}
 
 
 
