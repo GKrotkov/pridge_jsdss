@@ -430,17 +430,23 @@ EPA priors without any update. To optimize the choice of \(\lambda\), we
 use leave-one-out cross validation (LOOCV) \citep[pp.~200--203]{ISLR} to
 evaluate a grid of \(\lambda\) choices and select the one with minimal
 LOOCV mean squared error (MSE). \(\lambda\) is re-optimized with each
-new fit of the pRidge model to data.
+new fit of the pRidge model to data. To build intuition about
+\(\lambda\), it can be interpreted as a number of pseudo-matches per
+team weighting the prior. pRidge is equivalent to least squares after
+adding \(\lambda\) solo appearances per team, with each scoring exactly
+the team's prior.
 
 We chose a \(\lambda\) grid of all values between 0.01 and 20 evenly
 spaced on a log scale. Keeping the lower limit above 0 guarantees that
 the matrix is positive-definite, while 20 is an arbitrarily chosen upper
 bound based on exploratory cross validation plots (for an example,
-Figure~\ref{fig-severn-cv}). Searching the grid on a log scale instead
-of a linear scale helps preserve computational effort by allocating
-precision to the more useful part of the range. For instance, the
-difference between \(\lambda = 16.2\) and \(\lambda = 16\) is much less
-meaningful than the difference between \(\lambda = 1.2\) and
+Figure~\ref{fig-severn-cv}). This upper limit is higher than the number
+of qualification matches teams typically play (usually no more than 12),
+which helps build intuitive justification. Searching the grid on a log
+scale instead of a linear scale helps preserve computational effort by
+allocating precision to the more useful part of the range. For instance,
+the difference between \(\lambda = 16.2\) and \(\lambda = 16\) is much
+less meaningful than the difference between \(\lambda = 1.2\) and
 \(\lambda = 1\).
 
 \begin{figure}[htbp]
