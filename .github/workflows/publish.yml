@@ -24,11 +24,14 @@ jobs:
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           upgrade: 'TRUE'
+          # scoutR is pinned to the commit the manuscript was last rendered with
           packages:
             any::remotes
             any::rmarkdown
             any::knitr
             any::tidyverse
+            any::ggbeeswarm
+            github::gkrotkov/scoutR@7fdf5f7f5ede84d5fcefbf4518190734ffa38654
           install-quarto: false  # <-- Blocks the duplicate Quarto install
 
       - name: Set up Quarto
