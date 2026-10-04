@@ -108,7 +108,7 @@ Overfitting is a typical modeling issue that comes from fitting your training da
 
 Regularization [@ISLR, sec. 6.2.1] is the process of correcting for overfitting to improve the generalizability of a model. A common way to do this is by adding a penalty for complexity to the model. This forces the model optimization to weigh the cost of additional complexity against the performance gain on the training data. This can significantly improve a model's generalizability, especially when the exact value of the penalty is carefully chosen.
 
-![Overfitting example (Image from Wikipedia)](images/overfitting_wikipedia.png){#fig-overfitting width="40%"}
+![Overfitting example. Image: ["Pyplot overfitting"](https://commons.wikimedia.org/wiki/File:Pyplot_overfitting.png) by ThirdOrderLogic, via Wikimedia Commons, licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).](images/overfitting_wikipedia.png){#fig-overfitting width="40%"}
 
 ## Methods
 
