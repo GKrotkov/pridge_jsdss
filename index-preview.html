@@ -580,7 +580,7 @@ Figure&nbsp;2: pRidge Cross Validation for 2025 Severn District
 <section id="data" class="level3" data-number="2.6">
 <h3 data-number="2.6" class="anchored" data-anchor-id="data"><span class="header-section-number">2.6</span> Data</h3>
 <p>We used the TBA v3 API to access data from frc-events.firstinspires.org to evaluate the performance of pRidge, EPA, and OPR. We chose to use qualification matches from all regional and district qualifier events between 2016 and 2026 (n = 1389), excepting events in 2020 and 2021 to avoid seasons affected by the COVID-19 pandemic. We excluded playoff matches since playoff alliances develop meaningfully different dynamics than qualification matches with repeat partners and higher stakes. We decided to start data collection in 2016 for API consistency and to avoid Recycle Rush, a very atypical FRC game.</p>
-<p>In our dataset, we were unable to compute a percent improvement for only 22 events when comparing to OPR, and only 6 events when comparing to EPA. 6 of these events in both cases were the 2026 Israel districts, 2022 Nanjing Regional, and the 2023 Izmir Regional, all of which were canceled. The remaining fit failures overwhelmingly came from events with 27 or fewer teams (ex. 2022mokc3, 2024vapor), typically in pandemic-shortened 2022 events.</p>
+<p>In our dataset, we were unable to compute a percent improvement for only 6 events when comparing to OPR, and only 6 events when comparing to EPA. 6 of these events in both cases were the 2026 Israel districts, 2022 Nanjing Regional, and the 2023 Izmir Regional, all of which were canceled. The remaining fit failures overwhelmingly came from events with 27 or fewer teams (ex. 2022mokc3, 2024vapor), typically in pandemic-shortened 2022 events.</p>
 </section>
 </section>
 <section id="results" class="level2" data-number="3">
@@ -612,11 +612,11 @@ Figure&nbsp;2: pRidge Cross Validation for 2025 Severn District
 <div class="quarto-layout-row">
 <div class="cell-container"><div class="cell-decorator"><pre>In [6]:</pre></div><div id="cell-fig-opr-year" class="cell quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-comparison" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 22 rows containing non-finite outside the scale range
+<pre><code>Warning: Removed 6 rows containing non-finite outside the scale range
 (`stat_boxplot()`).</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 22 rows containing missing values or values outside the scale range
+<pre><code>Warning: Removed 6 rows containing missing values or values outside the scale range
 (`position_quasirandom()`).</code></pre>
 </div>
 <div class="cell-output-display quarto-layout-cell-subref" data-ref-parent="fig-comparison">
@@ -634,11 +634,11 @@ Figure&nbsp;2: pRidge Cross Validation for 2025 Severn District
 </div></div>
 <div class="cell-container"><div class="cell-decorator"><pre>In [7]:</pre></div><div id="cell-fig-opr-week" class="cell quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-comparison" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 22 rows containing non-finite outside the scale range
+<pre><code>Warning: Removed 6 rows containing non-finite outside the scale range
 (`stat_boxplot()`).</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 22 rows containing missing values or values outside the scale range
+<pre><code>Warning: Removed 6 rows containing missing values or values outside the scale range
 (`position_quasirandom()`).</code></pre>
 </div>
 <div class="cell-output-display quarto-layout-cell-subref" data-ref-parent="fig-comparison">
@@ -834,7 +834,7 @@ Figure&nbsp;4: Bootstrap confidence interval forest plot
 </div></div>
 <section id="comparison-against-opr" class="level3" data-number="3.1">
 <h3 data-number="3.1" class="anchored" data-anchor-id="comparison-against-opr"><span class="header-section-number">3.1</span> Comparison against OPR</h3>
-<p>In terms of cross validated MSE, pRidge improves on OPR by an average of 15.4% across all qualifier events between 2016 and 2026. The 95% bootstrap confidence intervals are outlined in <a href="#tbl-bootstrap" class="quarto-xref">Table&nbsp;2</a>. The confidence interval for the mean ranges between 15.0% and 15.8%, and no yearwise interval covers 0 or below. Across all 1389 events in the dataset, pRidge underperformed OPR at only 15 of them, 9 of those events being in 2026.</p>
+<p>In terms of cross validated MSE, pRidge improves on OPR by an average of 15.4% across all qualifier events between 2016 and 2026. The 95% bootstrap confidence intervals are outlined in <a href="#tbl-bootstrap" class="quarto-xref">Table&nbsp;2</a>. The confidence interval for the mean ranges between 15.0% and 15.8%, and no yearwise interval covers 0 or below. Across all 1389 events in the dataset, pRidge underperformed OPR at only 14 of them, 8 of those events being in 2026.</p>
 <p>Plotting percent improvement against year (<a href="#fig-opr-year" class="quarto-xref">Figure&nbsp;3 (a)</a>) shows some yearly variation, which appears to mostly be driven by the fit of the OPR model to that year’s game. For example, pRidge improves on OPR the least in 2026, by only 10.0% on average. The 2026 game features primarily linear, uncapped scoring and limited game piece scarcity, which lend themselves very well to OPR’s linearity assumptions. By comparison, pRidge overperforms OPR by the most in 2018, by 21.3% on average. The 2018 game relied on time-based scoring and had a snowball dynamic: alliances that won the scale overwhelmingly won the match <span class="citation" data-cites="powerup_blog">(<a href="#ref-powerup_blog" role="doc-biblioref">Marra 2018</a>)</span>, and a scale tipped in your favor was easier to score on. Neither of those dynamics lend themselves well to OPR’s key assumptions.</p>
 <p>There may also be meaningful “era” effects. pRidge overperforms OPR more in pre-pandemic seasons (average 19.2% improvement over 2016-2019) than in post-pandemic seasons (12.7% improvement over 2022-2026.) Team sustainability challenges through the pandemic, the removal of bag &amp; tag, the proliferation of swerve drive, and increasing COTS value all contribute to major differences in the program between those seasons and may influence this.</p>
 <p>The performance of pRidge compared to an OPR baseline is plotted in <a href="#fig-opr-week" class="quarto-xref">Figure&nbsp;3 (b)</a>. Over weeks of the season, pRidge appears to improve slightly better on average at later events, but it is important to note the small sample size for week 7 qualifying events - we have only 18 such events in our dataset.</p>
