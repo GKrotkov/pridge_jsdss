@@ -50,7 +50,7 @@ cv_fold <- function(fold, fold_ids, matches, priors){
     # use n_cores = 1 to avoid nested parallelization
     pridge_cv <- scoutR::pridge_lambda_cv(
         design_train, response_train, priors,
-        grid = seq(0, 20, length.out = 100), plot_mses = FALSE, n_cores = 1
+        grid = exp(seq(log(0.01), log(20), length.out = 100)), plot_mses = FALSE, n_cores = 1
     )
     lambda_opt <- as.numeric(names(which.min(pridge_cv)))
 
