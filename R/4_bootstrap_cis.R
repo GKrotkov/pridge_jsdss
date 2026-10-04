@@ -5,6 +5,8 @@ library(gt)
 library(glue)
 library(parallel)
 
+set.seed(449)
+
 B <- 1000000
 n_cores <- max(1, floor(detectCores() / 2))
 
