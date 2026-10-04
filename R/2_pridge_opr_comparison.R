@@ -44,6 +44,8 @@ cv_fold <- function(fold, fold_ids, matches, priors){
     response_test <- c(test$blue_score, test$red_score)
     design <- as.matrix(lineup_design_matrix(matches))
     design_train <- design[fold_ids != fold, ]
+    # drop priors for registered teams that never played, matching by team
+    priors <- priors[as.character(scoutR:::id2int(colnames(design)))]
     design_test <- design[fold_ids == fold, ]
 
     # select lambda via LOOCV on the training fold
