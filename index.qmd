@@ -210,7 +210,7 @@ $$
 
 We used the TBA v3 API to access data from frc-events.firstinspires.org to evaluate the performance of pRidge, EPA, and OPR. We chose to use qualification matches from all regional and district qualifier events between 2016 and 2026 (n = `{r} nrow(opr)`), excepting events in 2020 and 2021 to avoid seasons affected by the COVID-19 pandemic. We excluded playoff matches since playoff alliances develop meaningfully different dynamics than qualification matches with repeat partners and higher stakes. We decided to start data collection in 2016 for API consistency and to avoid Recycle Rush, a very atypical FRC game.
 
-In our dataset, we were unable to compute a percent improvement for only `{r} sum(is.na(opr$pct_imp))` events when comparing to OPR, and only `{r} sum(is.na(epa$pct_imp))` events when comparing to EPA. `{r} sum(is.na(opr$pct_imp) & is.na(epa$pct_imp))` of these events in both cases were the 2026 Israel districts, 2022 Nanjing Regional, and the 2023 Izmir Regional, all of which were canceled. The remaining fit failures overwhelmingly came from events with 27 or fewer teams (ex. 2022mokc3, 2024vapor), typically in pandemic-shortened 2022 events.
+In our dataset, we were unable to compute a percent improvement for `{r} sum(is.na(opr$pct_imp))` events when comparing to OPR, and `{r} sum(is.na(epa$pct_imp))` events when comparing to EPA. These events in both cases were the 4 2026 Israel district events, 2022 Nanjing Regional, and the 2023 Izmir Regional, all of which were canceled.
 
 ## Results
 
