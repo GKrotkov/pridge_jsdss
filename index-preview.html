@@ -5,12 +5,13 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-    <meta name="author" content="Steve Purves">
-    <meta name="author" content="Rowan Cockett">
-    <meta name="dcterms.date" content="2026-09-19">
-    <meta name="keywords" content="La Palma, Earthquakes">
+    <meta name="author" content="Gabriel Krotkov">
+    <meta name="author" content="Mitchell G. Hung">
+    <meta name="author" content="Rosy Yu">
+    <meta name="dcterms.date" content="2026-10-04">
+    <meta name="keywords" content="ridge regression, regularization, rating systems, Elo ratings, FIRST Robotics Competition">
 
-    <title>La Palma Earthquakes</title>
+    <title>Prior Ridge: Regularization for FRC Rating</title>
     <style>
       /* Default styles provided by pandoc.
       ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -186,7 +187,7 @@
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-c05cdaedc027ad77e42160dcdd2892ef.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-6e694d1f7ac3fc8d536aaaaf25d41a81.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -196,19 +197,35 @@
     document.body.classList.add('hypothesis-enabled');
   });
 </script>   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script> 
-      <meta name="citation_title" content="La Palma Earthquakes">
-<meta name="citation_abstract" content="In September 2021, a significant jump in seismic activity on the island of La Palma (Canary Islands, Spain) signaled the start of a volcanic crisis that still continues at the time of writing. Earthquake data is continually collected and published by the Instituto Geográphico Nacional (IGN). ...
+      <meta name="citation_title" content="Prior Ridge: Regularization for FRC Rating">
+<meta name="citation_abstract" content="In FRC (the FIRST Robotics Competition), there are two primary team rating models: OPR (Offensive Power Rating) and EPA (Expected Points Added). OPR is statistically efficient and unbiased, but has no memory between events and is essentially starting from scratch every event. Starting fresh every event means that OPR tends to have high variance, and often doesn&amp;amp;#039;t have enough data to stabilize. EPA achieves better prediction by incorporating historical information, but trades off statistical efficiency to do so---EPA doesn't learn from new data as fast as OPR. Prior Ridge (pRidge) applies Bayesian-inspired regularization to balance between the relatively high variance of OPR and the relatively high bias of EPA. On average over all qualifier events between 2016 and 2026, Prior Ridge overperforms OPR by `{r} pct(mean_imp(opr))` in terms of cross validated mean squared error, and overperforms EPA by `{r} pct(mean_imp(epa))` in terms of next-match-prediction error.
 ">
-<meta name="citation_keywords" content="La Palma,Earthquakes">
-<meta name="citation_author" content="Steve Purves">
-<meta name="citation_author" content="Rowan Cockett">
-<meta name="citation_publication_date" content="2026-09-19">
-<meta name="citation_cover_date" content="2026-09-19">
+<meta name="citation_keywords" content="ridge regression,regularization,rating systems,Elo ratings,FIRST Robotics Competition">
+<meta name="citation_author" content="Gabriel Krotkov">
+<meta name="citation_author" content="Mitchell G. Hung">
+<meta name="citation_author" content="Rosy Yu">
+<meta name="citation_publication_date" content="2026-10-04">
+<meta name="citation_cover_date" content="2026-10-04">
 <meta name="citation_year" content="2026">
-<meta name="citation_online_date" content="2026-09-19">
+<meta name="citation_online_date" content="2026-10-04">
 <meta name="citation_language" content="en">
 <meta name="citation_journal_title" content="Statistics and Data Science in Sports">
-<meta name="citation_reference" content="citation_title=Strategies for the development of volcanic hazard maps in monogenetic volcanic fields: The example of La Palma (Canary Islands);,citation_author=José Marrero;,citation_author=Alicia García;,citation_author=Manuel Berrocoso;,citation_author=Ángeles Llinares;,citation_author=Antonio Rodríguez-Losada;,citation_author=R. Ortiz;,citation_publication_date=2019-07;,citation_cover_date=2019-07;,citation_year=2019;,citation_doi=10.1186/s13617-019-0085-5;,citation_volume=8;,citation_journal_title=Journal of Applied Volcanology;">
+<meta name="citation_reference" content="citation_title=An introduction to statistical learning;,citation_author=Gareth James;,citation_author=Daniela Witten;,citation_author=Trevor Hastie;,citation_author=Robert Tibshirani;,citation_publication_date=2021;,citation_cover_date=2021;,citation_year=2021;,citation_doi=10.1007/978-1-0716-1418-1;,citation_isbn=1071614177;,citation_series_title=Springer texts in statistics;">
+<meta name="citation_reference" content="citation_title=The math behind OPR – an introduction;,citation_author=Eugene Fang;,citation_publication_date=2017;,citation_cover_date=2017;,citation_year=2017;,citation_fulltext_html_url=https://blog.thebluealliance.com/2017/10/05/the-math-behind-opr-an-introduction/;,citation_publisher=The Blue Alliance Blog;">
+<meta name="citation_reference" content="citation_title=2018w2 match analysis using the TBA API and R;,citation_author=Greg Marra;,citation_publication_date=2018;,citation_cover_date=2018;,citation_year=2018;,citation_fulltext_html_url=https://blog.thebluealliance.com/2018/03/10/2018w2-match-analysis-using-the-tba-api-and-r/;,citation_publisher=The Blue Alliance Blog;">
+<meta name="citation_reference" content="citation_title=OPR as linear regression;,citation_author=Gabriel Krotkov;,citation_publication_date=2024;,citation_cover_date=2024;,citation_year=2024;,citation_journal_title=https://tinyurl.com/opraslinreg;">
+<meta name="citation_reference" content="citation_title=Weighted least squares and row replication;,citation_author=Gabriel Krotkov;,citation_publication_date=2024;,citation_cover_date=2024;,citation_year=2024;,citation_journal_title=https://tinyurl.com/27bc6565;">
+<meta name="citation_reference" content="citation_title=Bin hyperparameter tuning;,citation_author=Gabriel Krotkov;,citation_publication_date=2024;,citation_cover_date=2024;,citation_year=2024;,citation_journal_title=https://rpubs.com/gkrotkov/opr_wls_tuning;">
+<meta name="citation_reference" content="citation_title=Evaluating FRC rating models;,citation_author=Statbotics;,citation_publication_date=2023;,citation_cover_date=2023;,citation_year=2023;,citation_fulltext_html_url=https://www.statbotics.io/blog/models;,citation_publisher=Statbotics;">
+<meta name="citation_reference" content="citation_title=Let’s do a little linear algebra;,citation_author=Scott Weingart;,citation_publication_date=2006;,citation_cover_date=2006;,citation_year=2006;,citation_doi=10.1007/978-0-387-09608-7;,citation_journal_title=https://www.chiefdelphi.com/t/offense-defense-rankings-for-1043-teams/71490/19;">
+<meta name="citation_reference" content="citation_title=A modern approach to regression with r;,citation_author=Simon J. Sheather;,citation_publication_date=2009;,citation_cover_date=2009;,citation_year=2009;">
+<meta name="citation_reference" content="citation_title=Effective FIRST strategies;,citation_author=Karthik Kanagasabapathy;,citation_publication_date=2020;,citation_cover_date=2020;,citation_year=2020;">
+<meta name="citation_reference" content="citation_title=Gauss Markov theorem;,citation_author=Marco Taboga;,citation_publication_date=2021;,citation_cover_date=2021;,citation_year=2021;,citation_fulltext_html_url=https://www.statlect.com/fundamentals-of-statistics/Gauss-Markov-theorem;,citation_publisher=Lectures on Probability Theory and Mathematical Statistics. Kindle Direct Publishing. Online appendix;">
+<meta name="citation_reference" content="citation_title=Bootstrap estimates of confidence intervals;,citation_author=Samantha Lomuscio;,citation_publication_date=2023;,citation_cover_date=2023;,citation_year=2023;,citation_fulltext_html_url=https://library.virginia.edu/data/articles/bootstrap-estimates-of-confidence-intervals;,citation_publisher=University of Virginia Library;">
+<meta name="citation_reference" content="citation_title=Deep dive of regularized adjusted plus-minus;,citation_author=Justin Jacobs;,citation_publication_date=2017;,citation_cover_date=2017;,citation_year=2017;,citation_fulltext_html_url=https://squared2020.com/2017/09/18/deep-dive-on-regularized-adjusted-plus-minus-i-introductory-example/;,citation_publisher=Squared Statistics;">
+<meta name="citation_reference" content="citation_title=Introduction to regularized adjusted plus minus;,citation_author=Quang Nguyen;,citation_author=Ron Yurko;,citation_publication_date=2024;,citation_cover_date=2024;,citation_year=2024;,citation_fulltext_html_url=https://ryurko.github.io/cmu_score_preprints/basketball/nba-rapm.html;,citation_publisher=CMU SCORE Module Repository;">
+<meta name="citation_reference" content="citation_title=Multiple regression, clearly explained;,citation_author=Josh Starmer;,citation_publication_date=2018;,citation_cover_date=2018;,citation_year=2018;">
+<meta name="citation_reference" content="citation_title=The EPA model;,citation_author=Abhijit Gupta;,citation_publication_date=2023;,citation_cover_date=2023;,citation_year=2023;,citation_fulltext_html_url=https://www.statbotics.io/blog/epa;,citation_publisher=Statbotics;">
 </head>
 
   <body class="quarto-notebook quarto-light">
@@ -223,7 +240,7 @@
      <header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">La Palma Earthquakes</h1>
+      <h1 class="title">Prior Ridge: Regularization for FRC Rating</h1>
           </div>
 
     
@@ -231,22 +248,30 @@
       <div class="quarto-title-meta-column-start">
             <div class="quarto-title-meta-author">
           <div class="quarto-title-meta-heading">Authors</div>
-          <div class="quarto-title-meta-heading">Affiliation</div>
+          <div class="quarto-title-meta-heading">Affiliations</div>
           
                 <div class="quarto-title-meta-contents">
-            <p class="author">Steve Purves <a href="mailto:steve@curvenote.com" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0002-0760-5497" class="quarto-title-author-orcid" aria-label="ORCID profile for Steve Purves"> <img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+            <p class="author">Gabriel Krotkov <a href="mailto:gabriel.gk.mail@gmail.com" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
           </div>
                 <div class="quarto-title-meta-contents">
                     <p class="affiliation">
-                        Curvenote
+                        FRC 449 &amp; 4821
                       </p>
                   </div>
                       <div class="quarto-title-meta-contents">
-            <p class="author">Rowan Cockett <a href="https://orcid.org/0000-0002-7859-8394" class="quarto-title-author-orcid" aria-label="ORCID profile for Rowan Cockett"> <img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+            <p class="author">Mitchell G. Hung </p>
           </div>
                 <div class="quarto-title-meta-contents">
                     <p class="affiliation">
-                        Curvenote
+                        FRC 449
+                      </p>
+                  </div>
+                      <div class="quarto-title-meta-contents">
+            <p class="author">Rosy Yu </p>
+          </div>
+                <div class="quarto-title-meta-contents">
+                    <p class="affiliation">
+                        FRC 449
                       </p>
                   </div>
                     </div>
@@ -257,7 +282,7 @@
                 <div>
             <div class="quarto-title-meta-heading">Published</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">September 19, 2026</p>
+              <p class="date">October 4, 2026</p>
             </div>
           </div>
           
@@ -271,14 +296,14 @@
     <div>
       <div class="abstract">
         <div class="block-title">Abstract</div>
-        <p>In September 2021, a significant jump in seismic activity on the island of La Palma (Canary Islands, Spain) signaled the start of a volcanic crisis that still continues at the time of writing. Earthquake data is continually collected and published by the Instituto Geográphico Nacional (IGN). …</p>
+        <p>In FRC (the FIRST Robotics Competition), there are two primary team rating models: OPR (Offensive Power Rating) and EPA (Expected Points Added). OPR is statistically efficient and unbiased, but has no memory between events and is essentially starting from scratch every event. Starting fresh every event means that OPR tends to have high variance, and often doesn’t have enough data to stabilize. EPA achieves better prediction by incorporating historical information, but trades off statistical efficiency to do so—EPA doesn’t learn from new data as fast as OPR. Prior Ridge (pRidge) applies Bayesian-inspired regularization to balance between the relatively high variance of OPR and the relatively high bias of EPA. On average over all qualifier events between 2016 and 2026, Prior Ridge overperforms OPR by 15.4% in terms of cross validated mean squared error, and overperforms EPA by 11.1% in terms of next-match-prediction error.</p>
       </div>
     </div>
 
     <div>
       <div class="keywords">
         <div class="block-title">Keywords</div>
-        <p>La Palma, Earthquakes</p>
+        <p>ridge regression, regularization, rating systems, Elo ratings, FIRST Robotics Competition</p>
       </div>
     </div>
 
@@ -290,9 +315,34 @@
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
-  <li><a href="#sec-data-methods" id="toc-sec-data-methods" class="nav-link" data-scroll-target="#sec-data-methods"><span class="header-section-number">2</span> Data &amp; Methods</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">3</span> Conclusion</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a>
+  <ul class="collapse">
+  <li><a href="#motivation-the-bias-variance-tradeoff" id="toc-motivation-the-bias-variance-tradeoff" class="nav-link" data-scroll-target="#motivation-the-bias-variance-tradeoff"><span class="header-section-number">1.1</span> Motivation: the bias-variance tradeoff</a></li>
+  <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background"><span class="header-section-number">1.2</span> Background</a></li>
+  </ul></li>
+  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods"><span class="header-section-number">2</span> Methods</a>
+  <ul class="collapse">
+  <li><a href="#prior-ridge-model" id="toc-prior-ridge-model" class="nav-link" data-scroll-target="#prior-ridge-model"><span class="header-section-number">2.1</span> Prior Ridge Model</a></li>
+  <li><a href="#picking-lambda" id="toc-picking-lambda" class="nav-link" data-scroll-target="#picking-lambda"><span class="header-section-number">2.2</span> Picking <span class="math inline">\(\lambda\)</span></a></li>
+  <li><a href="#cross-validation-evaluation-against-opr" id="toc-cross-validation-evaluation-against-opr" class="nav-link" data-scroll-target="#cross-validation-evaluation-against-opr"><span class="header-section-number">2.3</span> Cross validation evaluation against OPR</a></li>
+  <li><a href="#next-match-prediction-evaluation-against-epa" id="toc-next-match-prediction-evaluation-against-epa" class="nav-link" data-scroll-target="#next-match-prediction-evaluation-against-epa"><span class="header-section-number">2.4</span> Next-match-prediction evaluation against EPA</a></li>
+  <li><a href="#estimating-improvement" id="toc-estimating-improvement" class="nav-link" data-scroll-target="#estimating-improvement"><span class="header-section-number">2.5</span> Estimating % improvement</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="header-section-number">2.6</span> Data</a></li>
+  </ul></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results"><span class="header-section-number">3</span> Results</a>
+  <ul class="collapse">
+  <li><a href="#comparison-against-opr" id="toc-comparison-against-opr" class="nav-link" data-scroll-target="#comparison-against-opr"><span class="header-section-number">3.1</span> Comparison against OPR</a></li>
+  <li><a href="#comparison-against-epa" id="toc-comparison-against-epa" class="nav-link" data-scroll-target="#comparison-against-epa"><span class="header-section-number">3.2</span> Comparison against EPA</a></li>
+  </ul></li>
+  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion"><span class="header-section-number">4</span> Discussion</a>
+  <ul class="collapse">
+  <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations"><span class="header-section-number">4.1</span> Limitations</a></li>
+  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps"><span class="header-section-number">4.2</span> Next Steps</a></li>
+  </ul></li>
+  <li><a href="#technical-appendix" id="toc-technical-appendix" class="nav-link" data-scroll-target="#technical-appendix"><span class="header-section-number">5</span> Technical Appendix</a>
+  <ul class="collapse">
+  <li><a href="#sec-derivation" id="toc-sec-derivation" class="nav-link" data-scroll-target="#sec-derivation"><span class="header-section-number">5.1</span> Prior Ridge Coefficient Derivation</a></li>
+  </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
@@ -301,147 +351,625 @@
 </div>
 <main class="content quarto-banner-title-block" id="quarto-document-content">      
 
-       <section id="introduction" class="level2" data-number="1">
+       <div class="cell-container"><div class="cell-decorator"><pre>In [1]:</pre></div><div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggbeeswarm)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scoutR)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Cached results from the analysis pipeline in R/ (see the Technical Appendix)</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"data/pridge_vs_opr/pct_imp_2016_to_2026.rda"</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>opr <span class="ot">&lt;-</span> result</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"data/pridge_vs_epa/pct_imp_2016_to_2026.rda"</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>epa <span class="ot">&lt;-</span> result</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"data/bootstrap_results.rda"</span>) <span class="co"># bounds_opr, bounds_epa</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(result)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Format a percentage for the text, e.g. pct(15.397) gives "15.4%"</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>pct <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">digits =</span> <span class="dv">1</span>) {</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">round</span>(x, digits) <span class="sc">+</span> <span class="dv">0</span> <span class="co"># + 0 turns -0 into 0</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sub</span>(<span class="st">"^-"</span>, <span class="st">"−"</span>, <span class="fu">paste0</span>(<span class="fu">formatC</span>(x, <span class="at">format =</span> <span class="st">"f"</span>, <span class="at">digits =</span> digits), <span class="st">"%"</span>))</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Mean percent improvement across events, optionally restricted to some years</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>mean_imp <span class="ot">&lt;-</span> <span class="cf">function</span>(results, <span class="at">years =</span> <span class="fu">unique</span>(results<span class="sc">$</span>year)) {</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(results<span class="sc">$</span>pct_imp[results<span class="sc">$</span>year <span class="sc">%in%</span> years], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>pre_pandemic <span class="ot">&lt;-</span> <span class="dv">2016</span><span class="sc">:</span><span class="dv">2019</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>post_pandemic <span class="ot">&lt;-</span> <span class="dv">2022</span><span class="sc">:</span><span class="dv">2026</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>ci_opr <span class="ot">&lt;-</span> <span class="fu">filter</span>(bounds_opr, year <span class="sc">==</span> <span class="st">"Overall"</span>)</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>ci_epa <span class="ot">&lt;-</span> <span class="fu">filter</span>(bounds_epa, year <span class="sc">==</span> <span class="st">"Overall"</span>)</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>n_worse_opr <span class="ot">&lt;-</span> <span class="fu">sum</span>(opr<span class="sc">$</span>pct_imp <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>n_worse_opr_2026 <span class="ot">&lt;-</span> <span class="fu">sum</span>(opr<span class="sc">$</span>pct_imp <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> opr<span class="sc">$</span>year <span class="sc">==</span> <span class="dv">2026</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>n_week7 <span class="ot">&lt;-</span> <span class="fu">sum</span>(opr<span class="sc">$</span>week <span class="sc">+</span> <span class="dv">1</span> <span class="sc">==</span> <span class="dv">7</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></div>
+<!-- The abstract lives in this second metadata block so that its inline
+numbers can use the objects defined in the setup chunk above. -->
+<section id="introduction" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">1</span> Introduction</h2>
-<div class="cell-container"><div class="cell-decorator"><pre>In [1]:</pre></div><div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>eruptions <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1492</span>, <span class="dv">1585</span>, <span class="dv">1646</span>, <span class="dv">1677</span>, <span class="dv">1712</span>, <span class="dv">1949</span>, <span class="dv">1971</span>, <span class="dv">2021</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>n_eruptions <span class="ot">&lt;-</span> <span class="fu">length</span>(eruptions)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></div>
-<div class="cell-container"><div class="cell-decorator"><pre>In [2]:</pre></div><div id="cell-fig-timeline" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>) <span class="sc">+</span> <span class="fl">0.1</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(eruptions, <span class="fu">rep</span>(<span class="dv">0</span>, n_eruptions), </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">pch =</span> <span class="st">"|"</span>, <span class="at">axes =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">1</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">box</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div id="fig-timeline" class="quarto-float quarto-figure quarto-figure-center anchored" alt="An event plot of the years of the last 8 eruptions on La Palma.">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-timeline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
-<a href="index_files/figure-html/fig-timeline-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;1: Timeline of recent earthquakes on La Palma"><img src="index_files/figure-html/fig-timeline-1.png" class="img-fluid figure-img" alt="An event plot of the years of the last 8 eruptions on La Palma." width="576"></a>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-timeline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Timeline of recent earthquakes on La Palma
-</figcaption>
-</figure>
-</div>
-</div>
-</div></div>
-<div class="cell-container"><div class="cell-decorator"><pre>In [3]:</pre></div><div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>avg_years_between_eruptions <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">diff</span>(eruptions[<span class="sc">-</span>n_eruptions]))</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>avg_years_between_eruptions</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 79.83333</code></pre>
-</div>
-</div></div>
-<p>Based on data up to and including 1971, eruptions on La Palma happen every 79.8 years on average.</p>
-<p>Studies of the magma systems feeding the volcano, such as <span class="citation" data-cites="marrero2019">Marrero et al. (<a href="#ref-marrero2019" role="doc-biblioref">2019</a>)</span>, have proposed that there are two main magma reservoirs feeding the Cumbre Vieja volcano; one in the mantle (30-40km depth) which charges and in turn feeds a shallower crustal reservoir (10-20km depth).</p>
-<p>Eight eruptions have been recorded since the late 1400s (<a href="#fig-timeline" class="quarto-xref">Figure&nbsp;1</a>).</p>
-<p>Data and methods are discussed in <a href="#sec-data-methods" class="quarto-xref">Section&nbsp;2</a>.</p>
-<p>Let <span class="math inline">\(x\)</span> denote the number of eruptions in a year. Then, <span class="math inline">\(x\)</span> can be modeled by a Poisson distribution</p>
-<p><span id="eq-poisson"><span class="math display">\[
-p(x) = \frac{e^{-\lambda} \lambda^{x}}{x !}
-\tag{1}\]</span></span></p>
-<p>where <span class="math inline">\(\lambda\)</span> is the rate of eruptions per year. Using <a href="#eq-poisson" class="quarto-xref">Equation&nbsp;1</a>, the probability of an eruption in the next <span class="math inline">\(t\)</span> years can be calculated.</p>
-<div id="tbl-history" class="quarto-float quarto-figure quarto-figure-center anchored">
+<section id="motivation-the-bias-variance-tradeoff" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="motivation-the-bias-variance-tradeoff"><span class="header-section-number">1.1</span> Motivation: the bias-variance tradeoff</h3>
+<p>The two primary models for team rating in FRC neatly illustrate a bias-variance tradeoff common in real-world modeling. OPR<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> is a special case of linear regression, which is provably a minimum variance linear unbiased estimator. That is, if you require unbiasedness and agree with the linear regression assumptions, OPR is provably optimal <span class="citation" data-cites="gauss_markov">(<a href="#ref-gauss_markov" role="doc-biblioref">Taboga 2021</a>)</span>. However, you can often improve an estimator’s prediction by accepting some bias to reduce variance. Statbotics’ EPA <span class="citation" data-cites="statbotics_eval">(<a href="#ref-statbotics_eval" role="doc-biblioref">Statbotics 2023</a>)</span> does exactly this. By incorporating information about teams’ historical performance, EPA accepts statistical bias in exchange for much faster convergence. This is a good fit for the FRC setting, where teams rarely have more than 12 qualification matches at an event (and often have fewer), so data is relatively scarce.</p>
+<p>This leaves considerable room for optimization. Exactly how much prior information to incorporate is a hard challenge to resolve. Luckily, there’s an established body of regularization tools from regression analysis aimed specifically at solving this problem<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Prior Ridge (pRidge) applies those tools with a Bayesian twist to optimize the bias-variance tradeoff between OPR and EPA and pick more predictive coefficients.</p>
+</section>
+<section id="background" class="level3" data-number="1.2">
+<h3 data-number="1.2" class="anchored" data-anchor-id="background"><span class="header-section-number">1.2</span> Background</h3>
+<p>At FRC events, teams play matches in 3-team “alliances” with shared results. Like in any team sport, shared results pose a challenge for rating systems—it’s hard to parse out individual team performance from alliance–level results. Taking a team’s average alliance score and dividing by 3 is a reasonable first guess at their offensive contribution—but the FRC community has developed better methods for team rating.</p>
+<section id="frc-linear-regression-opr" class="level4" data-number="1.2.1">
+<h4 data-number="1.2.1" class="anchored" data-anchor-id="frc-linear-regression-opr"><span class="header-section-number">1.2.1</span> FRC Linear Regression (OPR)</h4>
+<p>One influential rating method is OPR (“Offensive Power Rating”), described in Eugene Fang’s The Blue Alliance blog <span class="citation" data-cites="opr_blog">(<a href="#ref-opr_blog" role="doc-biblioref">Fang 2017</a>)</span>. OPR is a special case of multiple linear regression with a zero intercept. We set it up as a system of equations where each team’s contribution is a variable, and each alliance’s performance is represented as an equation (ex. <span class="math inline">\(red1 + red2 + red3 = redScore\)</span>). Each match generates two equations, one for the red alliance, and one for the blue alliance. OPR is then just the least-squares approximate solution to this system. This is identical to the way linear regression minimizes the squared error between predicted and actual values. More formally, the OPR equation <span class="math inline">\(Mx = s\)</span> consists of <span class="math inline">\(M\)</span> (a matrix with alliances as rows and teams as columns), <span class="math inline">\(x\)</span> (the vector of team coefficients we solve for), and <span class="math inline">\(s\)</span> (the observed alliance scores). This mirrors the standard linear regression formulation <span class="math inline">\(y = X\beta\)</span> <span class="citation" data-cites="ISLR">(<a href="#ref-ISLR" role="doc-biblioref">James et al. 2021, sec. 3.2</a>)</span>, which solves for coefficients <span class="math inline">\(\beta\)</span> by minimizing squared residuals.</p>
+</section>
+<section id="frc-elo-ratings-statbotics-epa" class="level4" data-number="1.2.2">
+<h4 data-number="1.2.2" class="anchored" data-anchor-id="frc-elo-ratings-statbotics-epa"><span class="header-section-number">1.2.2</span> FRC Elo ratings (Statbotics EPA)</h4>
+<p>Statbotics’ EPA (“Expected Points Added”) is another popular FRC rating method. EPA <span class="citation" data-cites="epa_intro">(<a href="#ref-epa_intro" role="doc-biblioref">Gupta 2023</a>)</span> is adapted from the Elo rating system, initially designed for 1v1 Chess for 3v3 FRC. Unitless EPA, a metric very similar to Elo in its non-specificity to a certain season’s game, takes into account previous season performance for a first estimate. To produce the version of EPA used for score predictions, unitless EPA scales by the standard deviation of Week 1 scores, effectively adopting the “units” of a particular year’s points system. EPA updates are adjusted based on the “shock of victory”, modeled by <span class="math inline">\(K\)</span> and <span class="math inline">\(M\)</span>. <span class="math inline">\(K\)</span> is the learning rate for EPA: a higher <span class="math inline">\(K\)</span> means that EPA adjusts more based on the result of each match. <span class="math inline">\(M\)</span> is the margin parameter, which defines how much the EPA update cares about the opposing alliance’s performance. Both <span class="math inline">\(M\)</span> and <span class="math inline">\(K\)</span> are defined piecewise in terms of the number of matches played, with <span class="math inline">\(M\)</span> increasing and <span class="math inline">\(K\)</span> decreasing as the season continues. Unlike traditional Elo, EPA is designed to be a non-zero sum model: when one team’s EPA increases, others don’t necessarily decrease, which can reflect increasing team performance over the season.</p>
+<div id="tbl-methods" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-history-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;1: Recent historic eruptions on La Palma
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-methods-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Mapping FRC rating systems onto statistical methods
 </figcaption>
-<div aria-describedby="tbl-history-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="tbl-methods-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 38%">
+<col style="width: 37%">
+</colgroup>
 <thead>
 <tr class="header">
-<th>Name</th>
-<th>Year</th>
+<th>Method</th>
+<th>FRC Domain Name</th>
+<th>Reference Implementations</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Current</td>
-<td>2021</td>
+<td>Linear Regression</td>
+<td>OPR, Calculated Contribution</td>
+<td>TheBlueAlliance Insights</td>
 </tr>
 <tr class="even">
-<td>Teneguía</td>
-<td>1971</td>
-</tr>
-<tr class="odd">
-<td>Nambroque</td>
-<td>1949</td>
-</tr>
-<tr class="even">
-<td>El Charco</td>
-<td>1712</td>
-</tr>
-<tr class="odd">
-<td>Volcán San Antonio</td>
-<td>1677</td>
-</tr>
-<tr class="even">
-<td>Volcán San Martin</td>
-<td>1646</td>
-</tr>
-<tr class="odd">
-<td>Tajuya near El Paso</td>
-<td>1585</td>
-</tr>
-<tr class="even">
-<td>Montaña Quemada</td>
-<td>1492</td>
+<td>Elo Ratings</td>
+<td>EPA</td>
+<td>Statbotics, Caleb Sykes Elo</td>
 </tr>
 </tbody>
 </table>
 </div>
 </figure>
 </div>
-<p><a href="#tbl-history" class="quarto-xref">Table&nbsp;1</a> summarises the eruptions recorded since the colonization of the islands by Europeans in the late 1400s.</p>
-<div id="fig-map" class="quarto-float quarto-figure quarto-figure-center anchored">
+</section>
+<section id="overfitting-and-regularization" class="level4" data-number="1.2.3">
+<h4 data-number="1.2.3" class="anchored" data-anchor-id="overfitting-and-regularization"><span class="header-section-number">1.2.3</span> Overfitting and Regularization</h4>
+<p>Overfitting is a typical modeling issue that comes from fitting your training data too closely, usually because of high model complexity. In <a href="#fig-overfitting" class="quarto-xref">Figure&nbsp;1</a>, the blue dots represent training data, and the red and green curves are candidate models to fit the data. The red curve represents a complicated, high degree polynomial fit, while the green line represents a simple linear fit. The training error of the red line is exactly zero, since the model exactly intersects each dot, while the green model has some error due to random variance. Even though the red model has a lower training error than the green model, if we were to test against data outside this sample, the simpler green model is almost sure to perform better. We call the red model in this case “overfit” - that is, matching the training dataset too closely.</p>
+<p>Regularization <span class="citation" data-cites="ISLR">(<a href="#ref-ISLR" role="doc-biblioref">James et al. 2021, sec. 6.2.1</a>)</span> is the process of correcting for overfitting to improve the generalizability of a model. A common way to do this is by adding a penalty for complexity to the model. This forces the model optimization to weigh the cost of additional complexity against the performance gain on the training data. This can significantly improve a model’s generalizability, especially when the exact value of the penalty is carefully chosen.</p>
+<div id="fig-overfitting" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-map-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/la-palma-map.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;2: Map of La Palma"><img src="images/la-palma-map.png" class="img-fluid figure-img"></a>
+<div aria-describedby="fig-overfitting-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/overfitting_wikipedia.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;1: Overfitting example. Image: “Pyplot overfitting” by ThirdOrderLogic, via Wikimedia Commons, licensed under CC BY 4.0."><img src="images/overfitting_wikipedia.png" class="img-fluid figure-img" style="width:40.0%"></a>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-map-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: Map of La Palma
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-overfitting-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Overfitting example. Image: <a href="https://commons.wikimedia.org/wiki/File:Pyplot_overfitting.png">“Pyplot overfitting”</a> by ThirdOrderLogic, via Wikimedia Commons, licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
 </figcaption>
 </figure>
 </div>
-<p>La Palma is one of the west most islands in the Volcanic Archipelago of the Canary Islands (<a href="#fig-map" class="quarto-xref">Figure&nbsp;2</a>).</p>
-<div class="quarto-embed-nb-cell" data-notebook="/home/runner/work/pridge_jsdss/pridge_jsdss/notebooks/explore-earthquakes.qmd" data-notebook-title="Explore Earthquakes" data-notebook-cellid="cell-fig-spatial-plot">
-<div class="cell-container"><div class="cell-decorator"><pre>In [4]:</pre></div><div id="cell-fig-spatial-plot" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>la_palma <span class="op">|&gt;</span> </span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  ggplot(aes(Longitude, Latitude)) <span class="op">+</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  geom_point(aes(color <span class="op">=</span> Magnitude, size <span class="op">=</span> <span class="dv">40</span><span class="op">-</span>`Depth(km)`)) <span class="op">+</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  scale_color_viridis_c(direction <span class="op">=</span> <span class="op">-</span><span class="dv">1</span>) <span class="op">+</span> </span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  scale_size(<span class="bu">range</span> <span class="op">=</span> c(<span class="fl">0.5</span>, <span class="dv">2</span>), guide <span class="op">=</span> <span class="st">"none"</span>) <span class="op">+</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  theme_bw()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div id="fig-spatial-plot" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A scatterplot of earthquake locations plotting latitude against longitude.">
+</section>
+</section>
+</section>
+<section id="methods" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="methods"><span class="header-section-number">2</span> Methods</h2>
+<section id="prior-ridge-model" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="prior-ridge-model"><span class="header-section-number">2.1</span> Prior Ridge Model</h3>
+<p>The Prior Ridge model is based on Ridge Regression <span class="citation" data-cites="ISLR">(<a href="#ref-ISLR" role="doc-biblioref">James et al. 2021, sec. 6.2.1</a>)</span>, which is a regularized version of ordinary least squares regression. The loss function for ridge regression includes a penalty term scaled by <span class="math inline">\(\lambda\)</span>, the regularization parameter, which pushes all the coefficients in the model fit towards zero by penalizing large coefficients. This introduces some bias (towards zero), in exchange for considerably reducing estimate variance. In many model settings, this is a good tradeoff, and the simpler regularized model generalizes better than the optimal fit on training data. However, we can do better than regularizing towards zero. If we have an informative prior - that is, a good guess going into the event about the team’s rating - we can instead regularize towards <em>that</em> by penalizing the distance from the priors rather than penalizing the magnitude of the coefficients (derivation in <a href="#sec-derivation" class="quarto-xref">Section&nbsp;5.1</a>). Statbotics EPA provides us with exactly that - a very good guess as to the team’s actual per-match contribution. Prior Ridge is essentially OPR, with a trick layered on top: regularize towards pre-event Statbotics EPA as a prior. While the fundamental model still works with other priors (for example, season max OPR), we chose Statbotics EPA for familiarity and to explicitly optimize the balance between major rating methods.</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{OLS:} \quad \hat{\beta} &amp;= (X^TX)^{-1}(X^Ty) \\
+\text{Ridge:} \quad \hat{\beta} &amp;= (X^TX + \lambda I)^{-1}(X^Ty) \\
+\text{pRidge:} \quad \hat{\beta} &amp;= (X^TX + \lambda I)^{-1}(X^Ty + \lambda \beta_0)
+\end{aligned}
+\]</span></p>
+</section>
+<section id="picking-lambda" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="picking-lambda"><span class="header-section-number">2.2</span> Picking <span class="math inline">\(\lambda\)</span></h3>
+<p>Picking a good value of <span class="math inline">\(\lambda\)</span> is the core challenge to making pRidge effective. <span class="math inline">\(\lambda\)</span> controls bias-variance balance <span class="citation" data-cites="ISLR">(<a href="#ref-ISLR" role="doc-biblioref">James et al. 2021, sec. 2.2.2</a>)</span> between the priors and new data. On one hand, pRidge with <span class="math inline">\(\lambda = 0\)</span> is simply equivalent to OPR. On the other, pRidge with <span class="math inline">\(\lambda = \infty\)</span> makes predictions solely based on the EPA priors without any update. To optimize the choice of <span class="math inline">\(\lambda\)</span>, we use leave-one-out cross validation (LOOCV) <span class="citation" data-cites="ISLR">(<a href="#ref-ISLR" role="doc-biblioref">James et al. 2021, 200–203</a>)</span> to evaluate a grid of <span class="math inline">\(\lambda\)</span> choices and select the one with minimal LOOCV mean squared error (MSE). <span class="math inline">\(\lambda\)</span> is re-optimized with each new fit of the pRidge model to data.</p>
+<p>We chose a <span class="math inline">\(\lambda\)</span> grid of all values between 0.01 and 20 evenly spaced on a log scale. Keeping the lower limit above 0 guarantees that the matrix is positive-definite, while 20 is an arbitrarily chosen upper bound based on exploratory cross validation plots (for an example, <a href="#fig-severn-cv" class="quarto-xref">Figure&nbsp;2</a>). Searching the grid on a log scale instead of a linear scale helps preserve computational effort by allocating precision to the more useful part of the range. For instance, the difference between <span class="math inline">\(\lambda = 16.2\)</span> and <span class="math inline">\(\lambda = 16\)</span> is much less meaningful than the difference between <span class="math inline">\(\lambda = 1.2\)</span> and <span class="math inline">\(\lambda = 1\)</span>.</p>
+<div class="cell-container"><div class="cell-decorator"><pre>In [2]:</pre></div><div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2025 Severn District (2025mdsev), from the cached raw data</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"data/raw/year_2025.rda"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>severn <span class="ot">&lt;-</span> year_data<span class="sc">$</span>event_data[[<span class="st">"2025mdsev"</span>]]</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(year_data)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Pre-event EPA priors; team_events and the design columns are both in team</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># number order</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>severn_priors <span class="ot">&lt;-</span> <span class="fu">sapply</span>(severn<span class="sc">$</span>team_events, <span class="cf">function</span>(te) te<span class="sc">$</span>epa<span class="sc">$</span>stats<span class="sc">$</span>start)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>severn_design <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">lineup_design_matrix</span>(severn<span class="sc">$</span>matches))</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>severn_response <span class="ot">&lt;-</span> <span class="fu">c</span>(severn<span class="sc">$</span>matches<span class="sc">$</span>blue_score, severn<span class="sc">$</span>matches<span class="sc">$</span>red_score)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>lambda_grid <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fu">seq</span>(<span class="fu">log</span>(<span class="fl">0.01</span>), <span class="fu">log</span>(<span class="dv">20</span>), <span class="at">length.out =</span> <span class="dv">100</span>))</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># LOOCV MSE across the lambda grid, using only the first n_matches matches</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>severn_cv <span class="ot">&lt;-</span> <span class="cf">function</span>(n_matches) {</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(severn<span class="sc">$</span>matches)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  rows <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">seq_len</span>(n_matches), n <span class="sc">+</span> <span class="fu">seq_len</span>(n_matches))</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  mses <span class="ot">&lt;-</span> <span class="fu">pridge_lambda_cv</span>(</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    severn_design[rows, ], severn_response[rows], severn_priors,</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    lambda_grid, <span class="at">plot_mses =</span> <span class="cn">FALSE</span>, <span class="at">n_cores =</span> <span class="dv">1</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(<span class="at">lambda =</span> lambda_grid, <span class="at">mse =</span> mses)</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>cv_plot <span class="ot">&lt;-</span> <span class="cf">function</span>(cv) {</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>  best <span class="ot">&lt;-</span> <span class="fu">slice_min</span>(cv, mse, <span class="at">n =</span> <span class="dv">1</span>)</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(cv, <span class="fu">aes</span>(<span class="at">x =</span> lambda, <span class="at">y =</span> mse)) <span class="sc">+</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> best<span class="sc">$</span>lambda, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">colour =</span> <span class="st">"darkred"</span>) <span class="sc">+</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">annotate</span>(<span class="st">"label"</span>, <span class="at">x =</span> best<span class="sc">$</span>lambda, <span class="at">y =</span> <span class="cn">Inf</span>, <span class="at">vjust =</span> <span class="fl">1.3</span>,</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>             <span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">"lambda == %.2f"</span>, best<span class="sc">$</span>lambda), <span class="at">parse =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_log10</span>() <span class="sc">+</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">expression</span>(lambda), <span class="at">y =</span> <span class="st">"LOOCV MSE"</span>)</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cv_plot</span>(<span class="fu">severn_cv</span>(<span class="dv">16</span>))</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cv_plot</span>(<span class="fu">severn_cv</span>(<span class="fu">nrow</span>(severn<span class="sc">$</span>matches)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="fig-severn-cv" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-spatial-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
-<a href="index_files/figure-html/notebooks-explore-earthquakes-fig-spatial-plot-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;3: Locations of earthquakes on La Palma since 2017"><img src="index_files/figure-html/notebooks-explore-earthquakes-fig-spatial-plot-output-1.png" alt="A scatterplot of earthquake locations plotting latitude against longitude." width="672" height="480" class="figure-img"></a>
+<div aria-describedby="fig-severn-cv-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
+<div class="quarto-layout-row">
+<div class="cell-container"><div class="cell-decorator"><pre>In [3]:</pre></div><div id="cell-fig-severn-qm16" class="cell quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-severn-cv" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="cell-output-display quarto-layout-cell-subref" data-ref-parent="fig-severn-cv">
+<div id="fig-severn-qm16" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-severn-qm16-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
+<a href="index_files/figure-html/fig-severn-qm16-1.png" class="lightbox" data-gallery="fig-severn-cv" title="Figure&nbsp;2&nbsp;(a): With 16 matches complete"><img src="index_files/figure-html/fig-severn-qm16-1.png" class="img-fluid figure-img" data-ref-parent="fig-severn-cv" width="384"></a>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-spatial-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3: Locations of earthquakes on La Palma since 2017
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-severn-qm16-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) With 16 matches complete
+</figcaption>
+</figure>
+</div>
+</div>
+</div></div>
+<div class="cell-container"><div class="cell-decorator"><pre>In [4]:</pre></div><div id="cell-fig-severn-full" class="cell quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-severn-cv" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="cell-output-display quarto-layout-cell-subref" data-ref-parent="fig-severn-cv">
+<div id="fig-severn-full" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-severn-full-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
+<a href="index_files/figure-html/fig-severn-full-1.png" class="lightbox" data-gallery="fig-severn-cv" title="Figure&nbsp;2&nbsp;(b): With all matches complete"><img src="index_files/figure-html/fig-severn-full-1.png" class="img-fluid figure-img" data-ref-parent="fig-severn-cv" width="384"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-severn-full-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) With all matches complete
 </figcaption>
 </figure>
 </div>
 </div>
 </div></div>
 </div>
-<p><a href="#fig-spatial-plot" class="quarto-xref">Figure&nbsp;3</a> shows the location of recent Earthquakes on La Palma.</p>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-severn-cv-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: pRidge Cross Validation for 2025 Severn District
+</figcaption>
+</figure>
+</div>
 </section>
-<section id="sec-data-methods" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="sec-data-methods"><span class="header-section-number">2</span> Data &amp; Methods</h2>
+<section id="cross-validation-evaluation-against-opr" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="cross-validation-evaluation-against-opr"><span class="header-section-number">2.3</span> Cross validation evaluation against OPR</h3>
+<p>Both pRidge and OPR are fundamentally regression models, which makes comparing their performance easier. To evaluate the performance of pRidge against OPR, we used 4-fold cross validation on both models so all matches were represented in the test set at least once for each model, and then averaged the test MSE across folds. To preserve the separation of <span class="math inline">\(\lambda\)</span> selection and model evaluation, we nested the LOOCV for <span class="math inline">\(\lambda\)</span> selection inside the 4-fold cross validation for model evaluation. This also drove the choice of <span class="math inline">\(k = 4\)</span>: this limited the computational cost for nested cross validation loops.</p>
 </section>
-<section id="conclusion" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">3</span> Conclusion</h2>
+<section id="next-match-prediction-evaluation-against-epa" class="level3" data-number="2.4">
+<h3 data-number="2.4" class="anchored" data-anchor-id="next-match-prediction-evaluation-against-epa"><span class="header-section-number">2.4</span> Next-match-prediction evaluation against EPA</h3>
+<p>Selecting a fair comparison between pRidge and EPA is less direct, because pRidge is order-invariant while EPA is order-dependent. To evaluate between the models fairly, we designed a “next-match prediction” procedure as follows. For each match at each event, starting at the first match (i) for which OPR was valid to compute, compute a prediction for match (i + 1) for both pRidge and EPA based only on data up to match (i). Both models predict an alliance’s score by summing each team’s rating value. This gives us a prediction for each match after match (i) from which we can calculate an MSE for both models.</p>
+</section>
+<section id="estimating-improvement" class="level3" data-number="2.5">
+<h3 data-number="2.5" class="anchored" data-anchor-id="estimating-improvement"><span class="header-section-number">2.5</span> Estimating % improvement</h3>
+<p>For both the OPR and EPA baseline evaluations, we computed the % improvement against the baseline as below, then took the mean across all events and across years to estimate pRidge’s improvement against baseline models. We established the uncertainty in mean percent improvements with a 95% bootstrap <span class="citation" data-cites="uva_bootstrap">(<a href="#ref-uva_bootstrap" role="doc-biblioref">Lomuscio 2023</a>)</span> confidence interval with 1 million replications.</p>
+<p><span class="math display">\[
+\%\ \text{improvement} = \frac{\text{MSE}_{\text{baseline}} - \text{MSE}_{\text{pRidge}}}{\text{MSE}_{\text{baseline}}}
+\]</span></p>
+</section>
+<section id="data" class="level3" data-number="2.6">
+<h3 data-number="2.6" class="anchored" data-anchor-id="data"><span class="header-section-number">2.6</span> Data</h3>
+<p>We used the TBA v3 API to access data from frc-events.firstinspires.org to evaluate the performance of pRidge, EPA, and OPR. We chose to use qualification matches from all regional and district qualifier events between 2016 and 2026 (n = 1389), excepting events in 2020 and 2021 to avoid seasons affected by the COVID-19 pandemic. We excluded playoff matches since playoff alliances develop meaningfully different dynamics than qualification matches with repeat partners and higher stakes. We decided to start data collection in 2016 for API consistency and to avoid Recycle Rush, a very atypical FRC game.</p>
+<p>In our dataset, we were unable to compute a percent improvement for only 22 events when comparing to OPR, and only 6 events when comparing to EPA. 6 of these events in both cases were the 2026 Israel districts, 2022 Nanjing Regional, and the 2023 Izmir Regional, all of which were canceled. The remaining fit failures overwhelmingly came from events with 27 or fewer teams (ex. 2022mokc3, 2024vapor), typically in pandemic-shortened 2022 events.</p>
+</section>
+</section>
+<section id="results" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="results"><span class="header-section-number">3</span> Results</h2>
+<div class="cell-container"><div class="cell-decorator"><pre>In [5]:</pre></div><div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Per-event percent improvement over a baseline, one box per year or week</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>imp_plot <span class="ot">&lt;-</span> <span class="cf">function</span>(results, group, x_label, y_label, <span class="at">breaks =</span> <span class="fu">waiver</span>()) {</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(results, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.character</span>({{ group }}), <span class="at">y =</span> pct_imp <span class="sc">/</span> <span class="dv">100</span>)) <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.6</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>, <span class="at">fill =</span> <span class="st">"darkred"</span>) <span class="sc">+</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_quasirandom</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">width =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> breaks, <span class="at">labels =</span> scales<span class="sc">::</span>percent) <span class="sc">+</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_discrete</span>(<span class="at">limits =</span> rev) <span class="sc">+</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> x_label, <span class="at">y =</span> y_label)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>epa_breaks <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="fl">0.6</span>, <span class="fl">0.7</span>, <span class="at">by =</span> <span class="fl">0.2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">imp_plot</span>(opr, year, <span class="st">"Year"</span>, <span class="st">"% improvement in cross-validated MSE"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">imp_plot</span>(opr, week <span class="sc">+</span> <span class="dv">1</span>, <span class="st">"Week"</span>, <span class="st">"% improvement in cross-validated MSE"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">imp_plot</span>(epa, year, <span class="st">"Year"</span>, <span class="st">"% improvement in next-match-prediction MSE"</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">breaks =</span> epa_breaks)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">imp_plot</span>(epa, week <span class="sc">+</span> <span class="dv">1</span>, <span class="st">"Week"</span>, <span class="st">"% improvement in next-match-prediction MSE"</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">breaks =</span> epa_breaks)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="fig-comparison" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
+<div class="quarto-layout-row">
+<div class="cell-container"><div class="cell-decorator"><pre>In [6]:</pre></div><div id="cell-fig-opr-year" class="cell quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-comparison" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 22 rows containing non-finite outside the scale range
+(`stat_boxplot()`).</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 22 rows containing missing values or values outside the scale range
+(`position_quasirandom()`).</code></pre>
+</div>
+<div class="cell-output-display quarto-layout-cell-subref" data-ref-parent="fig-comparison">
+<div id="fig-opr-year" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-opr-year-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
+<a href="index_files/figure-html/fig-opr-year-1.png" class="lightbox" data-gallery="fig-comparison" title="Figure&nbsp;3&nbsp;(a): By year, OPR baseline"><img src="index_files/figure-html/fig-opr-year-1.png" class="img-fluid figure-img" data-ref-parent="fig-comparison" width="432"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-opr-year-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) By year, OPR baseline
+</figcaption>
+</figure>
+</div>
+</div>
+</div></div>
+<div class="cell-container"><div class="cell-decorator"><pre>In [7]:</pre></div><div id="cell-fig-opr-week" class="cell quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-comparison" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 22 rows containing non-finite outside the scale range
+(`stat_boxplot()`).</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 22 rows containing missing values or values outside the scale range
+(`position_quasirandom()`).</code></pre>
+</div>
+<div class="cell-output-display quarto-layout-cell-subref" data-ref-parent="fig-comparison">
+<div id="fig-opr-week" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-opr-week-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
+<a href="index_files/figure-html/fig-opr-week-1.png" class="lightbox" data-gallery="fig-comparison" title="Figure&nbsp;3&nbsp;(b): By week, OPR baseline"><img src="index_files/figure-html/fig-opr-week-1.png" class="img-fluid figure-img" data-ref-parent="fig-comparison" width="432"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-opr-week-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) By week, OPR baseline
+</figcaption>
+</figure>
+</div>
+</div>
+</div></div>
+</div>
+<div class="quarto-layout-row">
+<div class="cell-container"><div class="cell-decorator"><pre>In [8]:</pre></div><div id="cell-fig-epa-year" class="cell quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-comparison" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 6 rows containing non-finite outside the scale range
+(`stat_boxplot()`).</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 6 rows containing missing values or values outside the scale range
+(`position_quasirandom()`).</code></pre>
+</div>
+<div class="cell-output-display quarto-layout-cell-subref" data-ref-parent="fig-comparison">
+<div id="fig-epa-year" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-epa-year-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
+<a href="index_files/figure-html/fig-epa-year-1.png" class="lightbox" data-gallery="fig-comparison" title="Figure&nbsp;3&nbsp;(c): By year, EPA baseline"><img src="index_files/figure-html/fig-epa-year-1.png" class="img-fluid figure-img" data-ref-parent="fig-comparison" width="432"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-epa-year-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c) By year, EPA baseline
+</figcaption>
+</figure>
+</div>
+</div>
+</div></div>
+<div class="cell-container"><div class="cell-decorator"><pre>In [9]:</pre></div><div id="cell-fig-epa-week" class="cell quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-comparison" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 6 rows containing non-finite outside the scale range
+(`stat_boxplot()`).</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 6 rows containing missing values or values outside the scale range
+(`position_quasirandom()`).</code></pre>
+</div>
+<div class="cell-output-display quarto-layout-cell-subref" data-ref-parent="fig-comparison">
+<div id="fig-epa-week" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-epa-week-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
+<a href="index_files/figure-html/fig-epa-week-1.png" class="lightbox" data-gallery="fig-comparison" title="Figure&nbsp;3&nbsp;(d): By week, EPA baseline"><img src="index_files/figure-html/fig-epa-week-1.png" class="img-fluid figure-img" data-ref-parent="fig-comparison" width="432"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-epa-week-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(d) By week, EPA baseline
+</figcaption>
+</figure>
+</div>
+</div>
+</div></div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: pRidge performance comparison against baseline
+</figcaption>
+</figure>
+</div>
+<div class="cell-container"><div class="cell-decorator"><pre>In [10]:</pre></div><div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>fmt_ci <span class="ot">&lt;-</span> <span class="cf">function</span>(bounds) {</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sprintf</span>(<span class="st">"(%s, %s, %s)"</span>,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>          <span class="fu">pct</span>(bounds<span class="sc">$</span>lower), <span class="fu">pct</span>(bounds<span class="sc">$</span>median), <span class="fu">pct</span>(bounds<span class="sc">$</span>upper))</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">Year =</span> bounds_opr<span class="sc">$</span>year,</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at"># Events</span><span class="st">`</span> <span class="ot">=</span> bounds_opr<span class="sc">$</span>n_events,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">OPR Baseline</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">fmt_ci</span>(bounds_opr),</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">EPA Baseline</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">fmt_ci</span>(bounds_epa)</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">align =</span> <span class="st">"lrcc"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-container"><div class="cell-decorator"><pre>In [11]:</pre></div><div id="tbl-bootstrap" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-bootstrap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Bootstrap 95% confidence intervals for pRidge mean % improvement, shown as (2.5th, 50th, 97.5th) percentiles
+</figcaption>
+<div aria-describedby="tbl-bootstrap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Year</th>
+<th style="text-align: right;"># Events</th>
+<th style="text-align: center;">OPR Baseline</th>
+<th style="text-align: center;">EPA Baseline</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Overall</td>
+<td style="text-align: right;">1389</td>
+<td style="text-align: center;">(15.0%, 15.4%, 15.8%)</td>
+<td style="text-align: center;">(10.2%, 11.1%, 12.1%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2016</td>
+<td style="text-align: right;">118</td>
+<td style="text-align: center;">(16.9%, 18.3%, 19.7%)</td>
+<td style="text-align: center;">(−4.0%, −2.2%, −0.5%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2017</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: center;">(19.0%, 20.4%, 21.8%)</td>
+<td style="text-align: center;">(−2.7%, −1.5%, −0.2%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2018</td>
+<td style="text-align: right;">148</td>
+<td style="text-align: center;">(20.1%, 21.3%, 22.6%)</td>
+<td style="text-align: center;">(45.9%, 47.8%, 49.6%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2019</td>
+<td style="text-align: right;">162</td>
+<td style="text-align: center;">(16.0%, 16.9%, 17.9%)</td>
+<td style="text-align: center;">(−1.5%, 0.0%, 1.4%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2022</td>
+<td style="text-align: right;">158</td>
+<td style="text-align: center;">(11.1%, 12.1%, 13.2%)</td>
+<td style="text-align: center;">(4.7%, 6.9%, 9.0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2023</td>
+<td style="text-align: right;">155</td>
+<td style="text-align: center;">(12.3%, 13.2%, 14.1%)</td>
+<td style="text-align: center;">(5.0%, 7.0%, 8.9%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2024</td>
+<td style="text-align: right;">160</td>
+<td style="text-align: center;">(13.7%, 14.7%, 15.7%)</td>
+<td style="text-align: center;">(10.5%, 11.6%, 12.8%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2025</td>
+<td style="text-align: right;">172</td>
+<td style="text-align: center;">(12.9%, 13.9%, 14.9%)</td>
+<td style="text-align: center;">(18.2%, 19.9%, 21.5%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026</td>
+<td style="text-align: right;">181</td>
+<td style="text-align: center;">(9.0%, 10.0%, 11.0%)</td>
+<td style="text-align: center;">(6.0%, 7.7%, 9.4%)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div></div>
+</div></div>
+<div class="cell-container"><div class="cell-decorator"><pre>In [12]:</pre></div><div id="cell-fig-forestplot" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(<span class="at">OPR =</span> bounds_opr, <span class="at">EPA =</span> bounds_epa, <span class="at">.id =</span> <span class="st">"baseline"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">factor</span>(year, <span class="at">levels =</span> <span class="fu">rev</span>(bounds_opr<span class="sc">$</span>year)),</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">baseline =</span> <span class="fu">factor</span>(baseline, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"OPR"</span>, <span class="st">"EPA"</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> median, <span class="at">y =</span> year, <span class="at">colour =</span> baseline)) <span class="sc">+</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"grey60"</span>) <span class="sc">+</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> lower, <span class="at">xmax =</span> upper), <span class="at">orientation =</span> <span class="st">"y"</span>,</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">width =</span> <span class="fl">0.4</span>,</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.6</span>, <span class="at">orientation =</span> <span class="st">"y"</span>)) <span class="sc">+</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">15</span>, <span class="at">size =</span> <span class="fl">2.5</span>,</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.6</span>, <span class="at">orientation =</span> <span class="st">"y"</span>)) <span class="sc">+</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="at">OPR =</span> <span class="st">"#a7000a"</span>, <span class="at">EPA =</span> <span class="st">"forestgreen"</span>)) <span class="sc">+</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>) <span class="sc">+</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"% improvement over baseline (positive favors pRidge)"</span>,</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">colour =</span> <span class="st">"Baseline"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-forestplot" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-pos="htbp">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-forestplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
+<a href="index_files/figure-html/fig-forestplot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Figure&nbsp;4: Bootstrap confidence interval forest plot"><img src="index_files/figure-html/fig-forestplot-1.png" class="img-fluid figure-img" data-fig-pos="htbp" width="576"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-forestplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Bootstrap confidence interval forest plot
+</figcaption>
+</figure>
+</div>
+</div>
+</div></div>
+<section id="comparison-against-opr" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="comparison-against-opr"><span class="header-section-number">3.1</span> Comparison against OPR</h3>
+<p>In terms of cross validated MSE, pRidge improves on OPR by an average of 15.4% across all qualifier events between 2016 and 2026. The 95% bootstrap confidence intervals are outlined in <a href="#tbl-bootstrap" class="quarto-xref">Table&nbsp;2</a>. The confidence interval for the mean ranges between 15.0% and 15.8%, and no yearwise interval covers 0 or below. Across all 1389 events in the dataset, pRidge underperformed OPR at only 15 of them, 9 of those events being in 2026.</p>
+<p>Plotting percent improvement against year (<a href="#fig-opr-year" class="quarto-xref">Figure&nbsp;3 (a)</a>) shows some yearly variation, which appears to mostly be driven by the fit of the OPR model to that year’s game. For example, pRidge improves on OPR the least in 2026, by only 10.0% on average. The 2026 game features primarily linear, uncapped scoring and limited game piece scarcity, which lend themselves very well to OPR’s linearity assumptions. By comparison, pRidge overperforms OPR by the most in 2018, by 21.3% on average. The 2018 game relied on time-based scoring and had a snowball dynamic: alliances that won the scale overwhelmingly won the match <span class="citation" data-cites="powerup_blog">(<a href="#ref-powerup_blog" role="doc-biblioref">Marra 2018</a>)</span>, and a scale tipped in your favor was easier to score on. Neither of those dynamics lend themselves well to OPR’s key assumptions.</p>
+<p>There may also be meaningful “era” effects. pRidge overperforms OPR more in pre-pandemic seasons (average 19.2% improvement over 2016-2019) than in post-pandemic seasons (12.7% improvement over 2022-2026.) Team sustainability challenges through the pandemic, the removal of bag &amp; tag, the proliferation of swerve drive, and increasing COTS value all contribute to major differences in the program between those seasons and may influence this.</p>
+<p>The performance of pRidge compared to an OPR baseline is plotted in <a href="#fig-opr-week" class="quarto-xref">Figure&nbsp;3 (b)</a>. Over weeks of the season, pRidge appears to improve slightly better on average at later events, but it is important to note the small sample size for week 7 qualifying events - we have only 18 such events in our dataset.</p>
+</section>
+<section id="comparison-against-epa" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="comparison-against-epa"><span class="header-section-number">3.2</span> Comparison against EPA</h3>
+<p>In terms of next-match-prediction error, pRidge improves on EPA by an average of 11.1% across all qualifier events between 2016 and 2026. The 95% bootstrap confidence interval for the mean ranges between 10.2% and 12.1%. Yearwise confidence intervals for pRidge’s mean % improvement (<a href="#tbl-bootstrap" class="quarto-xref">Table&nbsp;2</a>) cover 0 for 2019, are below 0 for 2016 and 2017, and are above 0 for every other year in the dataset.</p>
+<p>pRidge overperforms EPA by the most in 2018 by an average of 47.8%, far more so than any other year. Our best explanation for this is that the snowball dynamics in the 2018 game lent themselves to blowouts that were well explained by prior information. These blowouts might challenge rating systems to update well, but regularizing over them could smooth over the issue. Even discarding 2018, pRidge improves on EPA by an average of 6.75% of next-match-prediction error on this dataset.</p>
+<p>There may also be “era” differences in pRidge’s performance compared to EPA, but they are more gradual than with OPR, and require ignoring 2018. Discarding 2018, pRidge actually underperforms EPA by 1.1% on average pre-pandemic, but overperforms EPA by 10.7% on average post-pandemic. It’s initially unintuitive that regularizing towards EPA could produce results that underperform EPA, but remember that we’re specifically regularizing towards the <em>pre-event</em> EPA. pRidge underperforming EPA in a particular year implies that the OPR update to the priors was less informative than the EPA update to the priors.</p>
+<p>The performance of pRidge compared to an EPA baseline is plotted in <a href="#fig-epa-week" class="quarto-xref">Figure&nbsp;3 (d)</a>. Over the weeks of the season, pRidge appears mostly steady in comparison to EPA. Again, there are too few week 7 qualifying events (n = 18) to make inferences about the late-season dynamics.</p>
+</section>
+</section>
+<section id="discussion" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="discussion"><span class="header-section-number">4</span> Discussion</h2>
+<p>Prior Ridge gives a meaningful, reasonably consistent improvement in team rating on OPR and EPA baselines. Against both baselines, pRidge’s relative performance appeared to change pre- and post-pandemic; improving against the EPA baseline, and reducing in improvement against the OPR baseline.</p>
+<section id="limitations" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="limitations"><span class="header-section-number">4.1</span> Limitations</h3>
+<p>Prior Ridge inherits the limitations of the models it is built on. Like OPR, it does not model interaction effects. Like EPA, it is biased towards historical performance. It is not incorporating any new information, just balancing the bias-variance tradeoff between those two methods. As with OPR, pRidge summarizes performance in qualification matches - the alliance interaction dynamics that come out in the playoffs make modeling playoff performance substantially different.</p>
+<p>Another noteworthy limitation: we did not evaluate the performance of Prior Ridge at the DCMP or CMP level. The differences in play patterns between qualifier events and higher levels of play may impact difference in performance between Prior Ridge and other rating systems.</p>
+</section>
+<section id="next-steps" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="next-steps"><span class="header-section-number">4.2</span> Next Steps</h3>
+<p>There are a few clear avenues to improving on Prior Ridge. For one, the current model assumes a constant <span class="math inline">\(\lambda\)</span>. However <span class="math inline">\(\lambda\)</span> could be a vector with a length equal to the number of competing teams, making the model more flexible. Optimizing <span class="math inline">\(\lambda\)</span> as a vector would be more computationally intensive, but could be a better fit for the data. This highlights another clear path to improvement for Prior Ridge: searching the <span class="math inline">\(\lambda\)</span> grid. Currently we evaluate all candidate values of <span class="math inline">\(\lambda\)</span> in the grid, but efficiently searching the solution space could make the fit much faster.</p>
+<p>Experimenting with different priors may improve the model. For example, for late-season events, once every team has played at least once, season-max OPR may be a better prior than EPA. Additionally, comparing pRidge’s performance to OPR in a next-match-prediction framework could give more insight into how well pRidge solves OPR’s stabilization challenges. OPR is typically extremely variable until about 6 matches per team have been played; pRidge provides an automatic balancing for this by rolling off <span class="math inline">\(\lambda\)</span> as more matches are played.</p>
+</section>
+</section>
+<section id="technical-appendix" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="technical-appendix"><span class="header-section-number">5</span> Technical Appendix</h2>
+<p>Code results rely on the <a href="https://github.com/GKrotkov/scoutR">scoutR</a> package, available on GitHub. To install, call <code>pak::pak("gkrotkov/scoutR")</code> in your R console. The scoutR documentation can be found at <a href="https://gkrotkov.github.io/scoutR/" class="uri">https://gkrotkov.github.io/scoutR/</a>.</p>
+<ul>
+<li>pRidge testing against OPR (<a href="https://github.com/GKrotkov/pRidge_eval/blob/main/R/2_pridge_opr_comparison.R">code</a>)</li>
+<li>pRidge testing against EPA (<a href="https://github.com/GKrotkov/pRidge_eval/blob/main/R/2_pridge_epa_comparison.R">code</a>)</li>
+<li>Visualization (<a href="https://github.com/GKrotkov/pRidge_eval/blob/main/R/3_pridge_viz.R">code</a>)</li>
+</ul>
+<section id="sec-derivation" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="sec-derivation"><span class="header-section-number">5.1</span> Prior Ridge Coefficient Derivation</h3>
+<p>Define:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\hat{\beta}: \text{prior ridge coefficients}, \quad
+\beta_0: \text{priors}, \quad
+X: \text{data matrix}, \\
+y: \text{response vector}, \quad
+L: \text{loss function}, \quad \lambda: \text{regularization penalty}
+\end{aligned}
+\]</span></p>
+<section id="loss-function" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="loss-function">Loss Function</h4>
+<p><span class="math display">\[
+L(\hat{\beta}) = \| y - X\hat{\beta} \|_2^2 + \lambda \| \hat{\beta} - \beta_0 \|_2^2
+\]</span></p>
+<p>By <span class="math inline">\(L_2\)</span> norm definition:</p>
+<p><span class="math display">\[
+L(\hat{\beta}) = (y - X\hat{\beta})^{T} (y - X\hat{\beta}) +
+\lambda (\hat{\beta} - \beta_0)^{T} (\hat{\beta} - \beta_0)
+\]</span></p>
+</section>
+<section id="compute-loss-gradient" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="compute-loss-gradient">Compute Loss Gradient</h4>
+<p><span class="math display">\[
+\nabla_{\hat{\beta}} L(\hat{\beta})
+= \nabla_{\hat{\beta}} [(y - X\hat{\beta})^{T} (y - X\hat{\beta})]
++ \lambda \nabla_{\hat{\beta}} [(\hat{\beta} - \beta_0)^{T} (\hat{\beta} - \beta_0)]
+\]</span></p>
+<p>Apply the chain rule and the matrix identity <span class="math inline">\(\nabla_{x} (x^{T}A x) = (A + A^{T})x = 2A x\)</span> (for symmetric <span class="math inline">\(A\)</span>):</p>
+<p><span class="math display">\[
+\begin{aligned}
+\nabla_{\hat{\beta}} L(\hat{\beta})
+&amp;= 2(y - X\hat{\beta})\nabla_{\hat{\beta}}[y - X\hat{\beta}] + \lambda * 2(\hat{\beta} - \beta_0) * \nabla_{\hat{\beta}} \hat{\beta} \\
+&amp;= -2X^T(y - X\hat{\beta}) + 2\lambda(\hat{\beta} - \beta_0)
+\end{aligned}
+\]</span></p>
+</section>
+<section id="set-gradient-to-zero" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="set-gradient-to-zero">Set Gradient to Zero</h4>
+<p><span class="math display">\[
+\nabla_{\hat{\beta}} L(\hat{\beta}) = 0
+\]</span></p>
+<p><span class="math display">\[
+0 = -2X^{T}(y - X\hat{\beta}) + 2\lambda(\hat{\beta} - \beta_0)
+\]</span></p>
+<p>Simplify:</p>
+<p><span class="math display">\[
+\begin{aligned}
+- X^{T}y + X^{T}X\hat{\beta} + \lambda \hat{\beta} - \lambda \beta_0 &amp;= 0 \\
+X^TX\hat{\beta} + \lambda\hat{\beta} &amp;= X^Ty + \lambda\beta_0 \\
+(X^{T}X + \lambda I)\hat{\beta} &amp;= X^{T}y + \lambda \beta_0
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\boxed{
+\hat{\beta} = (X^{T}X + \lambda I)^{-1}(X^{T}y + \lambda \beta_0)
+}
+\]</span></p>
+</section>
+</section>
 </section>
 <section id="references" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="references">References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" role="list">
-<div id="ref-marrero2019" class="csl-entry" role="listitem">
-Marrero, José, Alicia García, Manuel Berrocoso, Ángeles Llinares, Antonio Rodríguez-Losada, and R. Ortiz. 2019. <span>“Strategies for the Development of Volcanic Hazard Maps in Monogenetic Volcanic Fields: The Example of <span>La</span> <span>Palma</span> (<span>Canary</span> <span>Islands</span>).”</span> <em>Journal of Applied Volcanology</em> 8 (July). <a href="https://doi.org/10.1186/s13617-019-0085-5">https://doi.org/10.1186/s13617-019-0085-5</a>.
+<div id="ref-opr_blog" class="csl-entry" role="listitem">
+Fang, Eugene. 2017. <em>The Math Behind <span>OPR</span> – an Introduction</em>. The Blue Alliance Blog. <a href="https://blog.thebluealliance.com/2017/10/05/the-math-behind-opr-an-introduction/">https://blog.thebluealliance.com/2017/10/05/the-math-behind-opr-an-introduction/</a>.
+</div>
+<div id="ref-epa_intro" class="csl-entry" role="listitem">
+Gupta, Abhijit. 2023. <em>The <span>EPA</span> Model</em>. Statbotics. <a href="https://www.statbotics.io/blog/epa">https://www.statbotics.io/blog/epa</a>.
+</div>
+<div id="ref-rapm_blog" class="csl-entry" role="listitem">
+Jacobs, Justin. 2017. <em>Deep Dive of Regularized Adjusted Plus-Minus</em>. Squared Statistics. <a href="https://squared2020.com/2017/09/18/deep-dive-on-regularized-adjusted-plus-minus-i-introductory-example/">https://squared2020.com/2017/09/18/deep-dive-on-regularized-adjusted-plus-minus-i-introductory-example/</a>.
+</div>
+<div id="ref-ISLR" class="csl-entry" role="listitem">
+James, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2021. <em>An Introduction to Statistical Learning</em>. Springer Texts in Statistics. Springer. <a href="https://doi.org/10.1007/978-1-0716-1418-1">https://doi.org/10.1007/978-1-0716-1418-1</a>.
+</div>
+<div id="ref-uva_bootstrap" class="csl-entry" role="listitem">
+Lomuscio, Samantha. 2023. <em>Bootstrap Estimates of Confidence Intervals</em>. University of Virginia Library. <a href="https://library.virginia.edu/data/articles/bootstrap-estimates-of-confidence-intervals">https://library.virginia.edu/data/articles/bootstrap-estimates-of-confidence-intervals</a>.
+</div>
+<div id="ref-powerup_blog" class="csl-entry" role="listitem">
+Marra, Greg. 2018. <em>2018w2 Match Analysis Using the <span>TBA</span> <span>API</span> and <span>R</span></em>. The Blue Alliance Blog. <a href="https://blog.thebluealliance.com/2018/03/10/2018w2-match-analysis-using-the-tba-api-and-r/">https://blog.thebluealliance.com/2018/03/10/2018w2-match-analysis-using-the-tba-api-and-r/</a>.
+</div>
+<div id="ref-rapm_cmu" class="csl-entry" role="listitem">
+Nguyen, Quang, and Ron Yurko. 2024. <em>Introduction to Regularized Adjusted Plus Minus</em>. <span>CMU SCORE</span> Module Repository. <a href="https://ryurko.github.io/cmu_score_preprints/basketball/nba-rapm.html">https://ryurko.github.io/cmu_score_preprints/basketball/nba-rapm.html</a>.
+</div>
+<div id="ref-statbotics_eval" class="csl-entry" role="listitem">
+Statbotics. 2023. <em>Evaluating <span>FRC</span> Rating Models</em>. Statbotics. <a href="https://www.statbotics.io/blog/models">https://www.statbotics.io/blog/models</a>.
+</div>
+<div id="ref-gauss_markov" class="csl-entry" role="listitem">
+Taboga, Marco. 2021. <em><span>Gauss Markov</span> Theorem</em>. Lectures on Probability Theory and Mathematical Statistics. Kindle Direct Publishing. Online appendix. <a href="https://www.statlect.com/fundamentals-of-statistics/Gauss-Markov-theorem">https://www.statlect.com/fundamentals-of-statistics/Gauss-Markov-theorem</a>.
 </div>
 </div>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>We will refer to linear regression in an FRC context as OPR for familiarity, although other names outlined in <a href="#tbl-methods" class="quarto-xref">Table&nbsp;1</a> may be more descriptive.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>In fact, in NBA sports analytics (a similar data setting to FRC), RAPM <span class="citation" data-cites="rapm_cmu">(<a href="#ref-rapm_cmu" role="doc-biblioref">Nguyen and Yurko 2024</a>)</span> is an example of using regularization to improve on ordinary least squares regression popular since at least 2017 <span class="citation" data-cites="rapm_blog">(<a href="#ref-rapm_blog" role="doc-biblioref">Jacobs 2017</a>)</span>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
      </main>
 <!-- /main column -->  <script id="quarto-html-after-body" type="application/javascript">
