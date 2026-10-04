@@ -19,3 +19,6 @@
 site_libs/
 _freeze/
 *_files/
+
+# LaTeX used for original manuscript
+notebooks/jsdss.tex
